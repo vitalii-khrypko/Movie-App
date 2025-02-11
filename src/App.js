@@ -1,11 +1,14 @@
-import Movies from "./Components/Movies";
+import Movies from "./Components/Movies/Movies";
+import Header from "./Components/Header/Header";
+import Footer from "./Components/Footer/Footer";
 
 function App() {
 
   return (
       <div>
-        <h1>Movie App</h1>
+        <Header/>
         <Movies/>
+        <Footer/>
       </div>
   );
 }

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import './Movies.css';
+import "./Movies.css";
 
 const API_KEY = "466a3191920711785d3d0265531db629";
 const API_URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
@@ -16,14 +16,13 @@ const Movies = () => {
 
     return (
         <div className="movies-container">
+            <header className="header">
+                <h1>Movie Explorer</h1>
+            </header>
             <h2 className="movies-title">Popular Movies</h2>
             <div className="movies-grid">
                 {movies.map((movie) => (
-                    <div
-                        key={movie.id}
-                        className="movie-card"
-                        onClick={() => console.log(`Navigate to movie ${movie.title}`)}
-                    >
+                    <div key={movie.id} className="movie-card">
                         <img
                             src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                             alt={movie.title}
