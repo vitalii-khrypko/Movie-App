@@ -1,11 +1,13 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMovies } from "../../Redux/moviesSlice";
+import { useNavigate } from "react-router-dom";
 import { Grid, CardMedia, CardContent, CircularProgress } from "@mui/material";
 import { MoviesContainer, MovieCard, MovieTitle, MovieOverview } from "./MoviesStyles";
 
 const Movies = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { movies, status, error } = useSelector((state) => state.movies);
 
     useEffect(() => {
@@ -22,7 +24,7 @@ const Movies = () => {
             <Grid container spacing={3} justifyContent="center">
                 {movies.map((movie) => (
                     <Grid item key={movie.id} xs={12} sm={6} md={4} lg={3}>
-                        <MovieCard>
+                        <MovieCard onClick={() => navigate(`/movie/${movie.id}`)}>
                             <CardMedia
                                 component="img"
                                 height="350"

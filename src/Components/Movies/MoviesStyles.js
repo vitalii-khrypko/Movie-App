@@ -1,5 +1,5 @@
 import { styled } from "@mui/material/styles";
-import { Box, Grid, Card, Typography } from "@mui/material";
+import { Box, Card, Typography } from "@mui/material";
 
 export const MoviesContainer = styled(Box)({
     backgroundColor: "#fff",  // білий фон
@@ -17,6 +17,7 @@ export const MovieCard = styled(Card)({
         transform: "scale(1.05)",  // злегка збільшена картка при наведенні
         boxShadow: "0 6px 15px rgba(0, 0, 0, 0.15)",  // посилена тінь на hover
     },
+    cursor: "pointer",
 });
 
 export const MovieTitle = styled(Typography)({
