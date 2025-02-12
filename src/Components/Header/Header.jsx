@@ -1,17 +1,26 @@
-import "./Header.css";
+import { Container, Grid } from "@mui/material";
+import { HeaderContainer, HeaderTitle, NavList, NavButton } from "./HeaderStyles";
 
 const Header = () => {
     return (
-        <header className="header">
-            <div className="logo">Movie Explorer</div>
-            <nav>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Movies</a></li>
-                    <li><a href="#">Favorites</a></li>
-                </ul>
-            </nav>
-        </header>
+        <HeaderContainer>
+            <Container>
+                <Grid container justifyContent="space-between" alignItems="center" py={2}>
+                    <Grid item>
+                        <HeaderTitle variant="h4">Movie Explorer</HeaderTitle>
+                    </Grid>
+                    <Grid item>
+                        <nav>
+                            <NavList>
+                                <li><NavButton>Home</NavButton></li>
+                                <li><NavButton>Movies</NavButton></li>
+                                <li><NavButton>Favorites</NavButton></li>
+                            </NavList>
+                        </nav>
+                    </Grid>
+                </Grid>
+            </Container>
+        </HeaderContainer>
     );
 };
 

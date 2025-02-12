@@ -1,19 +1,28 @@
-import "./Footer.css";
+import { Container, Grid } from "@mui/material";
+import { FooterContainer, FooterText, FooterNavList, FooterNavButton } from "./FooterStyles";
 
 const Footer = () => {
     return (
-        <footer className="footer">
-            <div className="footer-container">
-                <p>&copy; {new Date().getFullYear()} Movie Explorer. All rights reserved.</p>
-                <nav>
-                    <ul>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </footer>
+        <FooterContainer>
+            <Container>
+                <Grid container justifyContent="space-between" alignItems="center" py={2}>
+                    <Grid item>
+                        <FooterText variant="body2">
+                            &copy; {new Date().getFullYear()} Movie Explorer. All rights reserved.
+                        </FooterText>
+                    </Grid>
+                    <Grid item>
+                        <nav>
+                            <FooterNavList>
+                                <li><FooterNavButton size="small">Privacy Policy</FooterNavButton></li>
+                                <li><FooterNavButton size="small">Terms of Service</FooterNavButton></li>
+                                <li><FooterNavButton size="small">Contact</FooterNavButton></li>
+                            </FooterNavList>
+                        </nav>
+                    </Grid>
+                </Grid>
+            </Container>
+        </FooterContainer>
     );
 };
 

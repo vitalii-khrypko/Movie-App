@@ -1,40 +1,45 @@
-import { useState, useEffect } from "react";
-import "./Movies.css";
-
-const API_KEY = "466a3191920711785d3d0265531db629";
-const API_URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchMovies } from "../../Redux/moviesSlice";
+import { Grid, CardMedia, CardContent, CircularProgress } from "@mui/material";
+import { MoviesContainer, MovieCard, MovieTitle, MovieOverview } from "./MoviesStyles";
 
 const Movies = () => {
-    const [movies, setMovies] = useState([]);
+    const dispatch = useDispatch();
+    const { movies, status, error } = useSelector((state) => state.movies);
 
     useEffect(() => {
-        fetch(API_URL)
-            .then((res) => res.json())
-            .then((data) => setMovies(data.results))
-            .catch((error) => console.error("Error fetching movies:", error));
-    }, []);
+        dispatch(fetchMovies());
+    }, [dispatch]);
 
     return (
-        <div className="movies-container">
-            <header className="header">
-                <h1>Movie Explorer</h1>
-            </header>
-            <h2 className="movies-title">Popular Movies</h2>
-            <div className="movies-grid">
+        <MoviesContainer>
+            <MovieTitle variant="h4" align="center" mb={4}>
+                Popular Movies
+            </MovieTitle>
+            {status === "loading" && <CircularProgress color="primary" sx={{ display: "block", margin: "auto" }} />}
+            {status === "failed" && <MovieOverview align="center" color="error">Error: {error}</MovieOverview>}
+            <Grid container spacing={3} justifyContent="center">
                 {movies.map((movie) => (
-                    <div key={movie.id} className="movie-card">
-                        <img
-                            src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                            alt={movie.title}
-                        />
-                        <div className="movie-card-details">
-                            <h3>{movie.title}</h3>
-                            <p>{movie.overview.slice(0, 100)}...</p>
-                        </div>
-                    </div>
+                    <Grid item key={movie.id} xs={12} sm={6} md={4} lg={3}>
+                        <MovieCard>
+                            <CardMedia
+                                component="img"
+                                height="350"
+                                image={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                                alt={movie.title}
+                            />
+                            <CardContent sx={{ textAlign: "center" }}>
+                                <MovieTitle variant="h6">{movie.title}</MovieTitle>
+                                <MovieOverview variant="body2">
+                                    {movie.overview.slice(0, 100)}...
+                                </MovieOverview>
+                            </CardContent>
+                        </MovieCard>
+                    </Grid>
                 ))}
-            </div>
-        </div>
+            </Grid>
+        </MoviesContainer>
     );
 };
 
