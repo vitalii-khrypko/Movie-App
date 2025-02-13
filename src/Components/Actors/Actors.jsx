@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchActorById } from "../../Redux/actorsSlice";
 import { Typography, CircularProgress, Box } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const Actors = () => {
     const { id } = useParams();
@@ -28,12 +29,14 @@ const Actors = () => {
                     <Box sx={{ display: "flex", gap: 2, overflowX: "auto", flexWrap: "nowrap" }}>
                         {actor.movie_credits.cast.map((movie) => (
                             <Box key={movie.id} sx={{ textAlign: "center" }}>
-                                <img
-                                    src={movie.poster_path ? `https://image.tmdb.org/t/p/w185/${movie.poster_path}` : "/default-movie.png"}
-                                    alt={movie.title}
-                                    style={{ width: "150px", borderRadius: "8px" }}
-                                />
-                                <Typography variant="body2">{movie.title}</Typography>
+                                <Link to={`/movie/${movie.id}`} style={{ textDecoration: "none", color: "inherit" }}>
+                                    <img
+                                        src={movie.poster_path ? `https://image.tmdb.org/t/p/w185/${movie.poster_path}` : "/default-movie.png"}
+                                        alt={movie.title}
+                                        style={{ width: "150px", borderRadius: "8px", cursor: "pointer" }}
+                                    />
+                                    <Typography variant="body2">{movie.title}</Typography>
+                                </Link>
                             </Box>
                         ))}
                     </Box>

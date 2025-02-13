@@ -3,7 +3,6 @@ import { Typography, Button, Grid } from "@mui/material";
 
 export const FooterContainer = styled("footer")({
     backgroundColor: "#032541",  // темно-синій
-    padding: "20px 0",
     marginTop: "50px",
 });
 

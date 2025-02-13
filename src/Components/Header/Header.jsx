@@ -1,5 +1,6 @@
 import { Container, Grid } from "@mui/material";
 import { HeaderContainer, HeaderTitle, NavList, NavButton } from "./HeaderStyles";
+import {Link} from "react-router-dom";
 
 const Header = () => {
     return (
@@ -7,7 +8,11 @@ const Header = () => {
             <Container>
                 <Grid container justifyContent="space-between" alignItems="center" py={2}>
                     <Grid item>
-                        <HeaderTitle variant="h4">Movie Explorer</HeaderTitle>
+                        <Link to={`/Movie-App`} style={{ textDecoration: "none", color: "inherit" }}>
+                            <HeaderTitle variant="h4">
+                                Movie Explorer
+                            </HeaderTitle>
+                        </Link>
                     </Grid>
                     <Grid item>
                         <nav>

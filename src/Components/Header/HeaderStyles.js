@@ -1,9 +1,8 @@
 import { styled } from "@mui/material/styles";
-import { Typography, Button, Grid } from "@mui/material";
+import { Typography, Button } from "@mui/material";
 
 export const HeaderContainer = styled("header")({
     backgroundColor: "#032541",  // темно-синій
-    padding: "20px 0",
 });
 
 export const HeaderTitle = styled(Typography)({
