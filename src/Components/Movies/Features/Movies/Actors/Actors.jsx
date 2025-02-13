@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { fetchActorById } from "../../Redux/actorsSlice";
+import { fetchActorById } from "../../../../../Redux/Features/Movies/actorsSlice";
 import { Typography, CircularProgress, Box } from "@mui/material";
 import { Link } from "react-router-dom";
 

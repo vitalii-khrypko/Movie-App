@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { fetchMovieById, fetchMovieCredits } from "../../Redux/moviesItemSlice";
+import { fetchMovieById, fetchMovieCredits } from "../../../../../Redux/Features/Movies/moviesItemSlice";
 import { Typography, CircularProgress, Box, Chip } from "@mui/material";
 import {
     MovieDetailsContainer,

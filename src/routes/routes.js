@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
-import Movies from "../Components/Movies/Movies";
-import MoviesItem from "../Components/MoviesItem/MoviesItem";
-import ActorDetails from "../Components/Actors/Actors";
+import Movies from "../Components/Movies/Features/Movies/Movies";
+import MoviesItem from "../Components/Movies/Features/Movies/MoviesItem/MoviesItem";
+import ActorDetails from "../Components/Movies/Features/Movies/Actors/Actors";
 
 const AppRoutes = () => {
     return (

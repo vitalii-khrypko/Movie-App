@@ -1,5 +1,6 @@
 import { styled } from "@mui/material/styles";
-import { Box, Card, Typography, Button  } from "@mui/material";
+import { Box, Card, Typography, Button } from "@mui/material";
+
 
 export const MoviesContainer = styled(Box)({
     backgroundColor: "#fff",  // білий фон
@@ -8,6 +9,7 @@ export const MoviesContainer = styled(Box)({
     padding: "20px",
 });
 
+//Movies
 export const MovieCard = styled(Card)({
     backgroundColor: "#fff",  // світла заливка для картки (білий)
     borderRadius: "10px",
@@ -31,12 +33,14 @@ export const MovieOverview = styled(Typography)({
     color: "#555",  // більш темний сірий для опису, щоб текст був читабельним
 });
 
-export const CategoryButton = styled(Button)(({ active }) => ({
+export const CategoryButton = styled(Button, {
+    shouldForwardProp: (prop) => prop !== "active"
+})(({ active }) => ({
     backgroundColor: active ? "#032541" : "transparent",
     color: active ? "#fff" : "#032541",
     fontWeight: 600,
     textTransform: "uppercase",
-    border: `2px solid ${active ? "#032541" : "#032541"}`,
+    border: `2px solid #032541`,
     borderRadius: "20px",
     padding: "8px 16px",
     marginRight: "10px",

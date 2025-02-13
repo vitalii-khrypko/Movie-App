@@ -17,9 +17,9 @@ const Header = () => {
                     <Grid item>
                         <nav>
                             <NavList>
-                                <li><NavButton>Home</NavButton></li>
                                 <li><NavButton>Movies</NavButton></li>
-                                <li><NavButton>Favorites</NavButton></li>
+                                <li><NavButton>TV Shows</NavButton></li>
+                                <li><NavButton>People</NavButton></li>
                             </NavList>
                         </nav>
                     </Grid>
