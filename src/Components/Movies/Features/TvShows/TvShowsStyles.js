@@ -1,11 +1,36 @@
 import { styled } from "@mui/material/styles";
-import {Button, Typography} from "@mui/material";
+import {Box, Button, Card, Typography} from "@mui/material";
+
+export const TvShowsContainer = styled(Box)({
+    backgroundColor: "#fff",  // білий фон
+    color: "black",           // чорний текст для контрасту
+    minHeight: "100vh",
+    padding: "20px",
+});
 
 export const TvTitle = styled(Typography)({
     fontWeight: 600,
     color: "#000000",
-    marginTop: "30px"
 });
+
+export const TvOverview = styled(Typography)({
+    color: "#555",  // більш темний сірий для опису, щоб текст був читабельним
+});
+
+export const TvCard = styled(Card)({
+    backgroundColor: "#fff",  // світла заливка для картки (білий)
+    borderRadius: "10px",
+    boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",  // легка тінь для глибини
+    transition: "transform 0.3s, box-shadow 0.3s",  // додано ефект на hover
+    '&:hover': {
+        transform: "scale(1.05)",  // злегка збільшена картка при наведенні
+        boxShadow: "0 6px 15px rgba(0, 0, 0, 0.15)",  // посилена тінь на hover
+    },
+    cursor: "pointer",
+    height: "525px",
+    width: "150px"
+});
+
 
 export const CategoryButton = styled(Button, {
     shouldForwardProp: (prop) => prop !== "active"

@@ -9,7 +9,6 @@ export const MoviesContainer = styled(Box)({
     padding: "20px",
 });
 
-//Movies
 export const MovieCard = styled(Card)({
     backgroundColor: "#fff",  // світла заливка для картки (білий)
     borderRadius: "10px",
