@@ -17,6 +17,7 @@ import {
     ActorName,
     ActorCharacter
 } from "./MoviesItemStyles";
+import { Link } from "react-router-dom";
 
 const MoviesItem = () => {
     const { id } = useParams();
@@ -65,12 +66,14 @@ const MoviesItem = () => {
                 <Box sx={{ display: "flex", gap: 2, overflowX: "auto", flexWrap: "nowrap" }}>
                     {cast.map((actor) => (
                         <ActorCard key={actor.id}>
-                            <ActorAvatar
-                                src={actor.profile_path ? `https://image.tmdb.org/t/p/w185/${actor.profile_path}` : "/default-avatar.png"}
-                                alt={actor.name}
-                            />
-                            <ActorName variant="body2">{actor.name}</ActorName>
-                            <ActorCharacter variant="body2">{actor.character}</ActorCharacter>
+                            <Link to={`/actor/${actor.id}`} style={{ textDecoration: "none", color: "inherit" }}>
+                                <ActorAvatar
+                                    src={actor.profile_path ? `https://image.tmdb.org/t/p/w185/${actor.profile_path}` : "/default-avatar.png"}
+                                    alt={actor.name}
+                                />
+                                <ActorName variant="body2">{actor.name}</ActorName>
+                                <ActorCharacter variant="body2">{actor.character}</ActorCharacter>
+                            </Link>
                         </ActorCard>
                     ))}
                 </Box>

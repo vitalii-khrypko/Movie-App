@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import moviesReducer from "./moviesSlice";
-import movieItemReducer from "./moviesItemSlice"; // Додай імпорт
+import movieItemReducer from "./moviesItemSlice";
+import actorsReducer from "./actorsSlice";
 
 export const store = configureStore({
     reducer: {
         movies: moviesReducer,
-        movieItem: movieItemReducer, // Додай редюсер сюди
+        movieItem: movieItemReducer,
+        actors: actorsReducer,
     },
 });
 
