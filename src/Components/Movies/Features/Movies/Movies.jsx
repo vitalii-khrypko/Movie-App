@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchMovies, setCategory } from "../../../../Redux/Features/Movies/moviesSlice";
 import { useNavigate } from "react-router-dom";
 import { Grid, CardMedia, CardContent, CircularProgress, Box } from "@mui/material";
-import { MoviesContainer, MovieCard, MovieTitle, MovieOverview, CategoryButton, TvTitle } from "./MoviesStyles";
+import { MoviesContainer, MovieCard, MovieTitle, MovieOverview, CategoryButton } from "./MoviesStyles";
 
 const Movies = () => {
     const dispatch = useDispatch();

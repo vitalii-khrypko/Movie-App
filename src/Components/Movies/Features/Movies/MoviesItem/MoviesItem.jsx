@@ -60,7 +60,6 @@ const MoviesItem = () => {
                 </MovieContent>
             </MovieDetailsContainer>
 
-            {/* Блок для актора поза MovieDetailsContainer */}
             <CastContainer>
                 <Typography variant="h5" gutterBottom>Top Billed Cast</Typography>
                 <Box sx={{ display: "flex", gap: 2, overflowX: "auto", flexWrap: "nowrap" }}>

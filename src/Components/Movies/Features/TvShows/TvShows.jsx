@@ -40,7 +40,7 @@ const TvShows = () => {
             <Box sx={{ display: "flex", overflowX: "auto", gap: "16px", paddingBottom: "20px" }}>
                 {tvShows.map((tvShow) => (
                     <Grid item key={tvShow.id} xs={12} sm={6} md={4} lg={3}>
-                        <TvCard onClick={() => navigate(`/tv/${tvShow.id}`)}>
+                        <TvCard onClick={() => navigate(`/tvShow/${tvShow.id}`)}>
                             <CardMedia
                                 component="img"
                                 height="350"
