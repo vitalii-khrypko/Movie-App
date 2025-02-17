@@ -20,7 +20,7 @@ export const MovieCard = styled(Card)({
     },
     cursor: "pointer",
     height: "525px",
-    width: "150px"
+    width: "250px"
 });
 
 export const MovieTitle = styled(Typography)({

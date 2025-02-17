@@ -24,7 +24,7 @@ const Header = () => {
                             <NavList>
                                 <li><NavButton onClick={() => dispatch(setSection("movies"))}>Movies</NavButton></li>
                                 <li><NavButton onClick={() => dispatch(setSection("tvshows"))}>TV Shows</NavButton></li>
-                                <li><NavButton>People</NavButton></li>
+                                <li><NavButton onClick={() => dispatch(setSection("people"))}>People</NavButton></li>
                             </NavList>
                         </nav>
                     </Grid>
