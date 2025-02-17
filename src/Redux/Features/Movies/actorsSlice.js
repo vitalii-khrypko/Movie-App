@@ -19,8 +19,15 @@ const actorsSlice = createSlice({
         actor: null,
         status: "idle",
         error: null,
+        biographyExpanded: {},  // Для кожного актора буде зберігатися стан його біографії
     },
-    reducers: {},
+    reducers: {
+        toggleBiography: (state, action) => {
+            const actorId = action.payload;
+            // Перемикаємо стан розкриття біографії для актора
+            state.biographyExpanded[actorId] = !state.biographyExpanded[actorId];
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchActorById.pending, (state) => {
@@ -36,5 +43,10 @@ const actorsSlice = createSlice({
             });
     },
 });
+
+export const { toggleBiography } = actorsSlice.actions;
+
+export const selectActor = (state) => state.actors.actor;
+export const selectBiographyExpanded = (state, actorId) => state.actors.biographyExpanded[actorId];
 
 export default actorsSlice.reducer;
