@@ -21,7 +21,8 @@ export const PeopleCard = styled(Card)({
     cursor: "pointer",
     height: "500px",
     width: "250px",
-    position: "relative"
+    position: "relative",
+    marginBottom: "15px",
 });
 
 export const PeopleTitle = styled(Typography)({
@@ -32,26 +33,6 @@ export const PeopleTitle = styled(Typography)({
 export const PeopleOverview = styled(Typography)({
     color: "#555",  // більш темний сірий для опису, щоб текст був читабельним
 });
-
-export const CategoryButton = styled(Button, {
-    shouldForwardProp: (prop) => prop !== "active"
-})(({ active }) => ({
-    backgroundColor: active ? "#032541" : "transparent",
-    color: active ? "#fff" : "#032541",
-    fontWeight: 600,
-    textTransform: "uppercase",
-    border: `2px solid #032541`,
-    borderRadius: "20px",
-    padding: "8px 16px",
-    marginRight: "10px",
-    marginLeft: "10px",
-    transition: "all 0.3s ease",
-    "&:hover": {
-        backgroundColor: "#01b4e4",
-        borderColor: "#01b4e4",
-        color: "#fff",
-    },
-}));
 
 export const PeopleFooter = styled(Box)({
     display: "flex",
@@ -69,4 +50,29 @@ export const PeopleRating = styled(Typography)({
     fontSize: "14px",
     fontWeight: "bold",
     color: "#ffcc00",
+});
+
+export const ScrollableContainer = styled(Box)({
+    display: "flex",
+    overflowX: "auto",
+    gap: "12px",
+    padding: "10px 20px",
+    scrollSnapType: "x mandatory",
+    scrollPadding: "20px",
+    WebkitOverflowScrolling: "touch",
+
+    "&::-webkit-scrollbar": {
+        height: "15px", // Зробимо трохи товстішим для видимості
+    },
+    "&::-webkit-scrollbar-track": {
+        background: "rgb(232,230,230)", // Трохи затемнений фон
+        borderRadius: "10px",
+    },
+    "&::-webkit-scrollbar-thumb": {
+        background: "rgba(174,172,172,0.5)",
+        borderRadius: "10px",
+    },
+    "&::-webkit-scrollbar-thumb:hover": {
+        background: "rgba(142,140,140,0.7)",
+    },
 });

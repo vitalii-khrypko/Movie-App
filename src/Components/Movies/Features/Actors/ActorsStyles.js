@@ -62,3 +62,28 @@ export const MovieCard = styled(Box)({
         },
     },
 });
+
+export const ScrollableContainer = styled(Box)({
+    display: "flex",
+    overflowX: "auto",
+    gap: "12px",
+    padding: "10px 20px",
+    scrollSnapType: "x mandatory",
+    scrollPadding: "20px",
+    WebkitOverflowScrolling: "touch",
+
+    "&::-webkit-scrollbar": {
+        height: "15px", // Зробимо трохи товстішим для видимості
+    },
+    "&::-webkit-scrollbar-track": {
+        background: "rgb(232,230,230)", // Трохи затемнений фон
+        borderRadius: "10px",
+    },
+    "&::-webkit-scrollbar-thumb": {
+        background: "rgba(174,172,172,0.5)",
+        borderRadius: "10px",
+    },
+    "&::-webkit-scrollbar-thumb:hover": {
+        background: "rgba(142,140,140,0.7)",
+    },
+});

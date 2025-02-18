@@ -14,7 +14,7 @@ const Header = () => {
                 <Grid container justifyContent="space-between" alignItems="center" py={2}>
                     <Grid item>
                         <Link to={`/Movie-App`} style={{ textDecoration: "none", color: "inherit" }}>
-                            <HeaderTitle variant="h4">
+                            <HeaderTitle variant="h6">
                                 Movie Explorer
                             </HeaderTitle>
                         </Link>

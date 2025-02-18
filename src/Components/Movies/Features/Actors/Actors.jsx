@@ -2,9 +2,17 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchActorById } from "../../../../Redux/Features/Actors/actorsSlice";
-import { Typography, CircularProgress, Box, Avatar, Divider, Button } from "@mui/material";
+import { Typography, CircularProgress, Box, Divider, Button } from "@mui/material";
 import { Link } from "react-router-dom";
-import { ActorContainer, ActorInfo, PersonalInfo, BioAndMovies, MovieCard, MoviesContainer } from './ActorsStyles';
+import {
+    ActorContainer,
+    ActorInfo,
+    PersonalInfo,
+    BioAndMovies,
+    MovieCard,
+    MoviesContainer,
+    ScrollableContainer
+} from './ActorsStyles';
 import { toggleBiography, selectBiographyExpanded } from "../../../../Redux/Features/Actors/actorsSlice";
 
 const Actors = () => {
@@ -69,7 +77,7 @@ const Actors = () => {
 
                     {actor.movie_credits && actor.movie_credits.cast && actor.movie_credits.cast.length > 0 ? (
                         <MoviesContainer>
-                            <Box sx={{ display: "flex", gap: 2, overflowX: "auto", flexWrap: "nowrap" }}>
+                            <ScrollableContainer>
                                 {actor.movie_credits.cast.map((movie) => (
                                     <MovieCard key={movie.id}>
                                         <Link to={`/movie/${movie.id}`} style={{ textDecoration: "none", color: "inherit" }}>
@@ -82,7 +90,7 @@ const Actors = () => {
                                         </Link>
                                     </MovieCard>
                                 ))}
-                            </Box>
+                            </ScrollableContainer>
                         </MoviesContainer>
                     ) : (
                         <Typography variant="body2" sx={{ marginTop: "20px" }}>No movies found for this actor.</Typography>

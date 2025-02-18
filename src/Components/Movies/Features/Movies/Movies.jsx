@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMovies, setCategory } from "../../../../Redux/Features/Movies/moviesSlice";
 import { useNavigate } from "react-router-dom";
-import { Grid, CardMedia, CardContent, CircularProgress, Box } from "@mui/material";
+import { Grid, CardMedia, CardContent, CircularProgress } from "@mui/material";
 import {
     MoviesContainer,
     MovieCard,
@@ -11,7 +11,8 @@ import {
     CategoryButton,
     MovieFooter,
     MovieYear,
-    MovieRating
+    MovieRating,
+    ScrollableContainer
 } from "./MoviesStyles";
 
 const Movies = () => {
@@ -46,7 +47,7 @@ const Movies = () => {
             </MovieTitle>
             {status === "loading" && <CircularProgress color="primary" sx={{ display: "block", margin: "auto" }} />}
             {status === "failed" && <MovieOverview align="center" color="error">Error: {error}</MovieOverview>}
-            <Box sx={{ display: "flex", overflowX: "auto", gap: "16px", paddingBottom: "20px" }}>
+            <ScrollableContainer>
                 {movies.map((movie) => (
                     <Grid item key={movie.id} xs={12} sm={6} md={4} lg={3}>
                         <MovieCard onClick={() => navigate(`/movie/${movie.id}`)}>
@@ -66,7 +67,7 @@ const Movies = () => {
                         </MovieCard>
                     </Grid>
                 ))}
-            </Box>
+            </ScrollableContainer>
         </MoviesContainer>
     );
 };

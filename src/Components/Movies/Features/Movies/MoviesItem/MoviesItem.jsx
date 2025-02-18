@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchMovieById, fetchMovieCredits } from "../../../../../Redux/Features/Movies/moviesItemSlice";
-import { Typography, CircularProgress, Box, Chip } from "@mui/material";
+import {Typography, CircularProgress, Box, Card} from "@mui/material";
 import {
     MovieDetailsContainer,
     MovieContent,
@@ -12,10 +12,8 @@ import {
     MovieTagline,
     MovieOverview,
     CastContainer,
-    ActorCard,
     ActorAvatar,
-    ActorName,
-    ActorCharacter
+    ActorCharacter, ActorCard, ScrollableContainer, ActorName
 } from "./MoviesItemStyles";
 import { Link } from "react-router-dom";
 
@@ -40,16 +38,35 @@ const MoviesItem = () => {
                     <Poster
                         src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                         alt={movie.title}
-                        sx={{ width: "250px", height: "375px", boxShadow: "0 4px 15px rgba(0, 0, 0, 0.3)" }}
+                        sx={{ height: "450px", boxShadow: "0 4px 15px rgba(0, 0, 0, 0.3)" }}
                     />
                     <MovieInfo sx={{ textAlign: "center", padding: "20px", width: "90%" }}>
                         <MovieTitle variant="h4">{movie.title}</MovieTitle>
                         {movie.tagline && <MovieTagline variant="h6">"{movie.tagline}"</MovieTagline>}
+                        <Typography variant="h5"><strong>Overview</strong></Typography>
                         <MovieOverview variant="body1">{movie.overview}</MovieOverview>
 
-                        <Box sx={{ display: "flex", justifyContent: "center", gap: 1, mb: 2 }}>
+                        <Box sx={{ display: "flex", justifyContent: "left", marginTop: "10px", gap: 2, flexWrap: "wrap", mb: 2 }}>
                             {movie.genres.map((genre) => (
-                                <Chip key={genre.id} label={genre.name} color="primary" />
+                                <Card
+                                    key={genre.id}
+                                    sx={{
+                                        padding: "8px 16px",
+                                        borderRadius: "16px",
+                                        backgroundColor: "#f0f0f0",
+                                        boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+                                        textAlign: "center",
+                                        fontWeight: "bold",
+                                        color: "primary.main",
+                                        '&:hover': {
+                                            backgroundColor: "primary.main",
+                                            color: "white",
+                                            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
+                                        },
+                                    }}
+                                >
+                                    {genre.name}
+                                </Card>
                             ))}
                         </Box>
 
@@ -60,9 +77,12 @@ const MoviesItem = () => {
                 </MovieContent>
             </MovieDetailsContainer>
 
+            <Typography variant="h5" gutterBottom sx={{ textAlign: "left", mb: 3, margin: "20px", fontWeight: "bold" }}>
+                Top Billed Cast
+            </Typography>
+
             <CastContainer>
-                <Typography variant="h5" gutterBottom>Top Billed Cast</Typography>
-                <Box sx={{ display: "flex", gap: 2, overflowX: "auto", flexWrap: "nowrap" }}>
+                <ScrollableContainer>
                     {cast.map((actor) => (
                         <ActorCard key={actor.id}>
                             <Link to={`/actor/${actor.id}`} style={{ textDecoration: "none", color: "inherit" }}>
@@ -70,13 +90,18 @@ const MoviesItem = () => {
                                     src={actor.profile_path ? `https://image.tmdb.org/t/p/w185/${actor.profile_path}` : "/default-avatar.png"}
                                     alt={actor.name}
                                 />
-                                <ActorName variant="body2">{actor.name}</ActorName>
-                                <ActorCharacter variant="body2">{actor.character}</ActorCharacter>
+                                <ActorName variant="body2" sx={{ fontSize: "16px", color: "black" }}>
+                                    {actor.name}
+                                </ActorName>
+                                <ActorCharacter variant="body2" sx={{margin: "20px"}}>
+                                    {actor.character}
+                                </ActorCharacter>
                             </Link>
                         </ActorCard>
                     ))}
-                </Box>
+                </ScrollableContainer>
             </CastContainer>
+
         </>
     );
 };

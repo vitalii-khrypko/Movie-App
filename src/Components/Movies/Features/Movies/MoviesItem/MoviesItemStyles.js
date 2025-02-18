@@ -1,9 +1,9 @@
 import { styled } from "@mui/material/styles";
-import { Box, Typography, Avatar } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 export const MovieDetailsContainer = styled(Box)(({ theme }) => ({
-    width: "100%",
-    minHeight: "100vh",
+    width: "100vw",
+    minHeight: "60vh",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -11,7 +11,8 @@ export const MovieDetailsContainer = styled(Box)(({ theme }) => ({
     backgroundSize: "cover",
     backgroundPosition: "center",
     padding: "80px 20px",
-
+    marginTop: "30px",
+    overflowX: "hidden",
     "&::before": {
         content: '""',
         position: "absolute",
@@ -44,8 +45,7 @@ export const MovieContent = styled(Box)(({ theme }) => ({
 }));
 
 export const Poster = styled("img")(({ theme }) => ({
-    width: "100%",
-    maxWidth: "400px",
+    maxWidth: "300px",
     borderRadius: "12px",
     boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.6)",
     transition: "transform 0.3s ease-in-out",
@@ -97,10 +97,9 @@ export const CastContainer = styled(Box)(({ theme }) => ({
     display: "flex",
     flexDirection: "row",
     overflowX: "auto",
-    gap: "16px",
+    gap: "20px",
     justifyContent: "flex-start",
     padding: "20px 0",
-    marginTop: "20px",
 
     [theme.breakpoints.up("md")]: {
         gap: "24px",
@@ -110,35 +109,47 @@ export const CastContainer = styled(Box)(({ theme }) => ({
 // Стиль для кожного актора
 export const ActorCard = styled(Box)(({ theme }) => ({
     textAlign: "center",
-    width: "120px", // Встановлено фіксовану ширину для карток актора
+    width: "180px", // Збільшено ширину карток
     boxSizing: "border-box",
+    borderRadius: "12px",
+    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
+    overflow: "hidden",
+    transition: "transform 0.3s ease-in-out",
+    marginBottom: "15px",
+
+    "&:hover": {
+        transform: "scale(1.1)", // Легке збільшення при наведенні
+    },
 
     [theme.breakpoints.up("md")]: {
-        width: "150px", // Розширюємо на більших екранах
+        width: "220px", // Розширено на більших екранах
     },
 }));
 
-// Стиль для аватарки актора
-export const ActorAvatar = styled(Avatar)(({ theme }) => ({
-    width: "90px", // Стандартний розмір
-    height: "90px",
+// Стиль для фотографії актора (замінюємо Avatar на img)
+export const ActorAvatar = styled("img")(({ theme }) => ({
+    width: "120px", // Розмір аватарки
+    height: "160px", // Висота аватарки
     margin: "0 auto",
-    boxShadow: "0 4px 10px rgba(0, 0, 0, 0.6)",
+    objectFit: "cover", // Щоб зберегти пропорції і уникнути деформації
+    boxShadow: "0 6px 15px rgba(0, 0, 0, 0.5)",
     transition: "transform 0.3s ease",
 
     "&:hover": {
-        transform: "scale(1.05)", // Легке збільшення аватарки при наведенні
+        transform: "scale(1.1)", // Легке збільшення аватарки при наведенні
     },
 
     [theme.breakpoints.up("md")]: {
-        width: "100px", // Трошки більша аватарка на великих екранах
-        height: "100px",
+        width: "130px", // Трошки більша аватарка на великих екранах
+        height: "170px", // Вища аватарка на великих екранах
     },
 }));
 
+
+
 // Стиль для тексту під аватаркою
 export const ActorName = styled(Typography)(({ theme }) => ({
-    fontSize: "1rem",
+    fontSize: "1.1rem", // Збільшено розмір шрифта
     fontWeight: "bold",
     marginTop: "8px",
     color: "#fff",
@@ -146,7 +157,31 @@ export const ActorName = styled(Typography)(({ theme }) => ({
 
 // Стиль для тексту щодо персонажа
 export const ActorCharacter = styled(Typography)(({ theme }) => ({
-    fontSize: "0.875rem",
+    fontSize: "1rem", // Збільшено розмір шрифта
     color: "#b0b0b0",
 }));
 
+export const ScrollableContainer = styled(Box)({
+    display: "flex",
+    overflowX: "auto",
+    gap: "12px",
+    padding: "10px 20px",
+    scrollSnapType: "x mandatory",
+    scrollPadding: "20px",
+    WebkitOverflowScrolling: "touch",
+
+    "&::-webkit-scrollbar": {
+        height: "15px", // Зробимо трохи товстішим для видимості
+    },
+    "&::-webkit-scrollbar-track": {
+        background: "rgb(232,230,230)", // Трохи затемнений фон
+        borderRadius: "10px",
+    },
+    "&::-webkit-scrollbar-thumb": {
+        background: "rgba(174,172,172,0.5)",
+        borderRadius: "10px",
+    },
+    "&::-webkit-scrollbar-thumb:hover": {
+        background: "rgba(142,140,140,0.7)",
+    },
+});

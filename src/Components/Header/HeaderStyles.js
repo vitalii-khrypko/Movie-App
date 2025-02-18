@@ -14,7 +14,6 @@ export const NavList = styled("ul")({
     listStyleType: "none",
     display: "flex",
     gap: "20px",
-    padding: 0,
 });
 
 export const NavButton = styled(Button)({

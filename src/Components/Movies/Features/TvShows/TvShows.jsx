@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTvShows, setCategory } from "../../../../Redux/Features/TvShows/tvShowsSlice";
 import { useNavigate } from "react-router-dom";
-import { Grid, CardMedia, CardContent, CircularProgress, Box } from "@mui/material";
+import { Grid, CardMedia, CardContent, CircularProgress } from "@mui/material";
 import {
     CategoryButton,
     TvTitle,
@@ -11,7 +11,8 @@ import {
     TvCard,
     TvFooter,
     TvYear,
-    TvRating
+    TvRating,
+    ScrollableContainer
 } from "./TvShowsStyles";
 
 const TvShows = () => {
@@ -46,7 +47,7 @@ const TvShows = () => {
             </TvTitle>
             {status === "loading" && <CircularProgress color="primary" sx={{ display: "block", margin: "auto" }} />}
             {status === "failed" && <TvOverview align="center" color="error">Error: {error}</TvOverview>}
-            <Box sx={{ display: "flex", overflowX: "auto", gap: "16px", paddingBottom: "20px" }}>
+            <ScrollableContainer>
                 {tvShows.map((tvShow) => (
                     <Grid item key={tvShow.id} xs={12} sm={6} md={4} lg={3}>
                         <TvCard onClick={() => navigate(`/tvShow/${tvShow.id}`)}>
@@ -66,7 +67,7 @@ const TvShows = () => {
                         </TvCard>
                     </Grid>
                 ))}
-            </Box>
+            </ScrollableContainer>
         </TvShowsContainer>
     )
 }
