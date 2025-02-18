@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { fetchActorById } from "../../../../../Redux/Features/Movies/actorsSlice";
+import { fetchActorById } from "../../../../Redux/Features/Actors/actorsSlice";
 import { Typography, CircularProgress, Box, Avatar, Divider, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import { ActorContainer, ActorInfo, PersonalInfo, BioAndMovies, MovieCard, MoviesContainer } from './ActorsStyles';
-import { toggleBiography, selectBiographyExpanded } from "../../../../../Redux/Features/Movies/actorsSlice";
+import { toggleBiography, selectBiographyExpanded } from "../../../../Redux/Features/Actors/actorsSlice";
 
 const Actors = () => {
     const { id } = useParams();
@@ -31,12 +31,18 @@ const Actors = () => {
             <Box sx={{ display: "flex", flexDirection: "row", gap: 4 }}>
                 {/* Left side: Photo and personal information */}
                 <ActorInfo>
-                    <Avatar
+                    <img
                         src={actor.profile_path ? `https://image.tmdb.org/t/p/w185/${actor.profile_path}` : "/default-profile.png"}
-                        sx={{ width: 200, height: 200, marginBottom: 3 }}
+                        alt={actor.name}
+                        style={{
+                            width: "300px",
+                            height: "auto",
+                            marginBottom: "16px",
+                            borderRadius: "8px"
+                        }}
                     />
                     <PersonalInfo>
-                        <Typography variant="h6" sx={{ fontWeight: "bold" }}>Personal Info</Typography>
+                        <Typography variant="h6" sx={{fontWeight: "bold"}}>Personal Info</Typography>
                         <Typography variant="body1">Known For: {actor.known_for_department || "Acting"}</Typography>
                         <Typography variant="body1">Known Credits: {actor.movie_credits?.cast.length || "0"}</Typography>
                         <Typography variant="body1">Gender: {actor.gender === 1 ? "Female" : "Male"}</Typography>
@@ -48,6 +54,7 @@ const Actors = () => {
                 {/* Right side: Biography and movie list */}
                 <BioAndMovies>
                     <Typography variant="h4" sx={{ marginTop: 2 }}>{actor.name}</Typography>
+                    <Typography variant="h6" sx={{ marginTop: 2 }}>Biography</Typography>
                     <Typography variant="body1" sx={{ marginTop: 2 }}>
                         {isBiographyExpanded ? actor.biography : `${actor.biography?.substring(0, 400)}...`}
                     </Typography>
@@ -58,7 +65,7 @@ const Actors = () => {
                     </Button>
 
                     <Divider sx={{ marginTop: 3 }} />
-                    <Typography variant="h5" sx={{ marginTop: "20px" }}>Movies</Typography>
+                    <Typography variant="h5" sx={{ marginTop: "20px" }}>Known For</Typography>
 
                     {actor.movie_credits && actor.movie_credits.cast && actor.movie_credits.cast.length > 0 ? (
                         <MoviesContainer>

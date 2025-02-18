@@ -67,7 +67,7 @@ const TvShowsItem = () => {
                 <Box sx={{ display: "flex", gap: 2, overflowX: "auto", flexWrap: "nowrap" }}>
                     {cast.map((actor) => (
                         <ActorCard key={actor.id}>
-                            <Link to={`/seriesCast/${actor.id}`} style={{ textDecoration: "none", color: "inherit" }}>
+                            <Link to={`/actor/${actor.id}`} style={{ textDecoration: "none", color: "inherit" }}>
                                 <ActorAvatar
                                     src={actor.profile_path ? `https://image.tmdb.org/t/p/w185/${actor.profile_path}` : "/default-avatar.png"}
                                     alt={actor.name}
