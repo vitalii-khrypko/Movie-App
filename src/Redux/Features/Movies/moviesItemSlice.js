@@ -15,11 +15,20 @@ export const fetchMovieCredits = createAsyncThunk("movieItem/fetchMovieCredits",
     return data.cast.slice(0, 10); // Беремо 10 головних акторів
 });
 
+export const fetchMovieTrailer = createAsyncThunk("movieItem/fetchMovieTrailer", async (id) => {
+    const response = await fetch(`${BASE_URL}/${id}/videos?api_key=${API_KEY}&language=en-US`);
+    const data = await response.json();
+    const trailers = data.results.filter(video => video.type === "Trailer");
+    return trailers;
+});
+
+
 const movieItemSlice = createSlice({
     name: "movieItem",
     initialState: {
         movie: null,
         cast: [],
+        trailer: null,
         status: "idle",
         error: null
     },
@@ -39,6 +48,9 @@ const movieItemSlice = createSlice({
             })
             .addCase(fetchMovieCredits.fulfilled, (state, action) => {
                 state.cast = action.payload;
+            })
+            .addCase(fetchMovieTrailer.fulfilled, (state, action) => {
+                state.trailer = action.payload;
             });
     }
 });

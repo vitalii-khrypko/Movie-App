@@ -1,8 +1,23 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { fetchMovieById, fetchMovieCredits } from "../../../../../Redux/Features/Movies/moviesItemSlice";
-import {Typography, CircularProgress, Box, Card} from "@mui/material";
+import {
+    fetchMovieById,
+    fetchMovieCredits,
+    fetchMovieTrailer
+} from "../../../../../Redux/Features/Movies/moviesItemSlice";
+import { openTrailerModal, closeTrailerModal } from "../../../../../Redux/Features/Movies/trailerMovieSlice";
+import {
+    Typography,
+    CircularProgress,
+    Box,
+    Card,
+    Button,
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    DialogActions
+} from "@mui/material";
 import {
     MovieDetailsContainer,
     MovieContent,
@@ -20,11 +35,21 @@ import { Link } from "react-router-dom";
 const MoviesItem = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
-    const { movie, cast, status, error } = useSelector((state) => state.movieItem);
+    const { movie, cast, trailer, status, error } = useSelector((state) => state.movieItem);
+    const { isOpen } = useSelector((state) => state.trailerModal);
+
+    const handleClickOpen = () => {
+        dispatch(openTrailerModal()); // open modal window
+    };
+
+    const handleClose = () => {
+        dispatch(closeTrailerModal()); // close modal window
+    };
 
     useEffect(() => {
         dispatch(fetchMovieById(id));
         dispatch(fetchMovieCredits(id));
+        dispatch(fetchMovieTrailer(id));
     }, [dispatch, id]);
 
     if (status === "loading") return <CircularProgress sx={{ display: "block", margin: "auto" }} />;
@@ -73,9 +98,43 @@ const MoviesItem = () => {
                         <Typography variant="body1"><strong>Release Date:</strong> {movie.release_date}</Typography>
                         <Typography variant="body1"><strong>Duration:</strong> {movie.runtime} min</Typography>
                         <Typography variant="body1"><strong>Rating:</strong> {movie.vote_average.toFixed(1)} / 10 ({movie.vote_count} votes)</Typography>
+                        {/* Кнопка Play Trailer */}
+                        {trailer && trailer.length > 0 && (
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={handleClickOpen}
+                                sx={{ marginTop: "20px" }}
+                            >
+                                Play Trailer
+                            </Button>
+                        )}
                     </MovieInfo>
                 </MovieContent>
             </MovieDetailsContainer>
+
+            {/* Trailer */}
+            <Dialog open={isOpen} onClose={handleClose} maxWidth="md" fullWidth>
+                <DialogTitle>Trailer</DialogTitle>
+                <DialogContent>
+                    {trailer && trailer.length > 0 && (
+                        <iframe
+                            width="100%"
+                            height="500px"
+                            src={`https://www.youtube.com/embed/${trailer[0].key}`}
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                            title="Movie Trailer"
+                        />
+                    )}
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose} color="primary">
+                        Close
+                    </Button>
+                </DialogActions>
+            </Dialog>
 
             <Typography variant="h5" gutterBottom sx={{ textAlign: "left", mb: 3, margin: "20px", fontWeight: "bold" }}>
                 Top Billed Cast
