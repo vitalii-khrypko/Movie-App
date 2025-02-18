@@ -19,8 +19,9 @@ export const PeopleCard = styled(Card)({
         boxShadow: "0 6px 15px rgba(0, 0, 0, 0.15)",  // посилена тінь на hover
     },
     cursor: "pointer",
-    height: "525px",
-    width: "250px"
+    height: "500px",
+    width: "250px",
+    position: "relative"
 });
 
 export const PeopleTitle = styled(Typography)({
@@ -51,3 +52,21 @@ export const CategoryButton = styled(Button, {
         color: "#fff",
     },
 }));
+
+export const PeopleFooter = styled(Box)({
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "8px",
+    position: "absolute",
+    bottom: "8px",
+    left: "0",
+    right: "0",
+    background: "rgba(255, 255, 255, 0.8)", // Легке затемнення для видимості
+});
+
+export const PeopleRating = styled(Typography)({
+    fontSize: "14px",
+    fontWeight: "bold",
+    color: "#ffcc00",
+});

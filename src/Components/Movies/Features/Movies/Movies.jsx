@@ -3,7 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchMovies, setCategory } from "../../../../Redux/Features/Movies/moviesSlice";
 import { useNavigate } from "react-router-dom";
 import { Grid, CardMedia, CardContent, CircularProgress, Box } from "@mui/material";
-import { MoviesContainer, MovieCard, MovieTitle, MovieOverview, CategoryButton } from "./MoviesStyles";
+import {
+    MoviesContainer,
+    MovieCard,
+    MovieTitle,
+    MovieOverview,
+    CategoryButton,
+    MovieFooter,
+    MovieYear,
+    MovieRating
+} from "./MoviesStyles";
 
 const Movies = () => {
     const dispatch = useDispatch();
@@ -49,6 +58,10 @@ const Movies = () => {
                             />
                             <CardContent sx={{ textAlign: "center" }}>
                                 <MovieTitle variant="h6">{movie.title}</MovieTitle>
+                                <MovieFooter>
+                                    <MovieYear>{new Date(movie.release_date).getFullYear()}</MovieYear>
+                                    <MovieRating>{movie.vote_average.toFixed(1)}</MovieRating>
+                                </MovieFooter>
                             </CardContent>
                         </MovieCard>
                     </Grid>

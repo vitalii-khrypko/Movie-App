@@ -53,7 +53,7 @@ const TvShowsItem = () => {
                             ))}
                         </Box>
 
-                        <Typography variant="body1"><strong>Release Date:</strong> {tvShow.first_air_date}</Typography>
+                        <Typography variant="body1"><strong>First Air Date:</strong> {tvShow.first_air_date}</Typography>
                         <Typography variant="body1">
                             <strong>Duration:</strong> {tvShow.episode_run_time?.[0] ? `${tvShow.episode_run_time[0]} min` : "N/A"}
                         </Typography>

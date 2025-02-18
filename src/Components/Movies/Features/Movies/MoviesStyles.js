@@ -10,18 +10,20 @@ export const MoviesContainer = styled(Box)({
 });
 
 export const MovieCard = styled(Card)({
-    backgroundColor: "#fff",  // світла заливка для картки (білий)
+    backgroundColor: "#fff",
     borderRadius: "10px",
-    boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",  // легка тінь для глибини
-    transition: "transform 0.3s, box-shadow 0.3s",  // додано ефект на hover
+    boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+    transition: "transform 0.3s, box-shadow 0.3s",
     '&:hover': {
-        transform: "scale(1.05)",  // злегка збільшена картка при наведенні
-        boxShadow: "0 6px 15px rgba(0, 0, 0, 0.15)",  // посилена тінь на hover
+        transform: "scale(1.05)",
+        boxShadow: "0 6px 15px rgba(0, 0, 0, 0.15)",
     },
     cursor: "pointer",
-    height: "525px",
-    width: "250px"
+    height: "500px",
+    width: "250px",
+    position: "relative", // ДОДАНО, щоб дочірні елементи правильно позиціонувалися
 });
+
 
 export const MovieTitle = styled(Typography)({
     fontWeight: 600,
@@ -51,3 +53,28 @@ export const CategoryButton = styled(Button, {
         color: "#fff",
     },
 }));
+
+export const MovieFooter = styled(Box)({
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "8px",
+    position: "absolute",
+    bottom: "8px",
+    left: "0",
+    right: "0",
+    background: "rgba(255, 255, 255, 0.8)", // Легке затемнення для видимості
+});
+
+
+export const MovieYear = styled(Typography)({
+    fontSize: "14px",
+    fontWeight: "bold",
+    color: "#555",
+});
+
+export const MovieRating = styled(Typography)({
+    fontSize: "14px",
+    fontWeight: "bold",
+    color: "#ffcc00",
+});

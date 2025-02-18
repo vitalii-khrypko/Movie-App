@@ -43,8 +43,8 @@ const Actors = () => {
                     />
                     <PersonalInfo>
                         <Typography variant="h6" sx={{fontWeight: "bold"}}>Personal Info</Typography>
-                        <Typography variant="body1">Known For: {actor.known_for_department || "Acting"}</Typography>
                         <Typography variant="body1">Known Credits: {actor.movie_credits?.cast.length || "0"}</Typography>
+                        <Typography variant="body1">Popularity: {actor.popularity}</Typography>
                         <Typography variant="body1">Gender: {actor.gender === 1 ? "Female" : "Male"}</Typography>
                         <Typography variant="body1">Birthday: {actor.birthday || "Not available"}</Typography>
                         <Typography variant="body1">Place of Birth: {actor.place_of_birth || "Not available"}</Typography>

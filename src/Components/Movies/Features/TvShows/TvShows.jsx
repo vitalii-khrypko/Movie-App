@@ -3,7 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchTvShows, setCategory } from "../../../../Redux/Features/TvShows/tvShowsSlice";
 import { useNavigate } from "react-router-dom";
 import { Grid, CardMedia, CardContent, CircularProgress, Box } from "@mui/material";
-import { CategoryButton, TvTitle, TvShowsContainer, TvOverview, TvCard} from "./TvShowsStyles";
+import {
+    CategoryButton,
+    TvTitle,
+    TvShowsContainer,
+    TvOverview,
+    TvCard,
+    TvFooter,
+    TvYear,
+    TvRating
+} from "./TvShowsStyles";
 
 const TvShows = () => {
     const dispatch = useDispatch();
@@ -49,6 +58,10 @@ const TvShows = () => {
                             />
                             <CardContent sx={{ textAlign: "center" }}>
                                 <TvTitle variant="h6">{tvShow.name}</TvTitle>
+                                <TvFooter>
+                                    <TvYear>{new Date(tvShow.first_air_date).getFullYear()}</TvYear>
+                                    <TvRating>{tvShow.vote_average.toFixed(1)}</TvRating>
+                                </TvFooter>
                             </CardContent>
                         </TvCard>
                     </Grid>

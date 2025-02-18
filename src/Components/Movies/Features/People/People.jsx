@@ -3,7 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchPeople } from "../../../../Redux/Features/People/peopleSlice";
 import { useNavigate } from "react-router-dom";
 import { Grid, CardMedia, CardContent, CircularProgress, Box, Typography } from "@mui/material";
-import { PeopleContainer, PeopleCard, PeopleTitle, PeopleOverview } from "./PeopleStyles";
+import {
+    PeopleContainer,
+    PeopleCard,
+    PeopleTitle,
+    PeopleOverview,
+    PeopleFooter,
+    PeopleRating
+} from "./PeopleStyles";
 
 const People = () => {
     const dispatch = useDispatch();
@@ -33,6 +40,9 @@ const People = () => {
                             />
                             <CardContent sx={{ textAlign: "center" }}>
                                 <Typography variant="h6">{person.name}</Typography>
+                                <PeopleFooter> Popularity:
+                                    <PeopleRating>{person.popularity}</PeopleRating>
+                                </PeopleFooter>
                             </CardContent>
                         </PeopleCard>
                     </Grid>
