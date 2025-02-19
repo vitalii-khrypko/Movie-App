@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchMovies, setCategory } from "../../../../Redux/Features/Movies/moviesSlice";
+import { fetchMovies, setCategory, loadMore } from "../../../../Redux/Features/Movies/moviesSlice";
 import { useNavigate } from "react-router-dom";
 import { Grid, CardMedia, CardContent, CircularProgress } from "@mui/material";
 import {
@@ -12,20 +12,29 @@ import {
     MovieFooter,
     MovieYear,
     MovieRating,
-    ScrollableContainer
+    ScrollableContainer,
+    LoadMoreButtonContainer,
+    LoadMoreButton
 } from "./MoviesStyles";
 
 const Movies = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { movies, status, error, category } = useSelector((state) => state.movies);
+    const { movies, status, error, category, page } = useSelector((state) => state.movies);
 
     useEffect(() => {
-        dispatch(fetchMovies(category));
-    }, [dispatch, category]);
+        dispatch(fetchMovies({ category, page }));
+    }, [dispatch, category, page]);
 
     const handleCategoryChange = (newCategory) => {
-        dispatch(setCategory(newCategory));
+        if (category !== newCategory) {
+            dispatch(setCategory(newCategory));
+        }
+    };
+
+    const handleLoadMore = () => {
+        dispatch(loadMore());
+        dispatch(fetchMovies({ category, page: page + 1 }));
     };
 
     return (
@@ -45,8 +54,10 @@ const Movies = () => {
                     Upcoming
                 </CategoryButton>
             </MovieTitle>
+
             {status === "loading" && <CircularProgress color="primary" sx={{ display: "block", margin: "auto" }} />}
             {status === "failed" && <MovieOverview align="center" color="error">Error: {error}</MovieOverview>}
+
             <ScrollableContainer>
                 {movies.map((movie) => (
                     <Grid item key={movie.id} xs={12} sm={6} md={4} lg={3}>
@@ -67,6 +78,10 @@ const Movies = () => {
                         </MovieCard>
                     </Grid>
                 ))}
+
+                <LoadMoreButtonContainer>
+                    <LoadMoreButton onClick={handleLoadMore}>more...</LoadMoreButton>
+                </LoadMoreButtonContainer>
             </ScrollableContainer>
         </MoviesContainer>
     );

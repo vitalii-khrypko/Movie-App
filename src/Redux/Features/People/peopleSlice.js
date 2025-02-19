@@ -5,17 +5,21 @@ const BASE_URL = "https://api.themoviedb.org/3/person/popular";
 
 export const fetchPeople = createAsyncThunk(
     "people/fetchPeople",
-    async () => {
-        const response = await fetch(`${BASE_URL}?api_key=${API_KEY}&language=en-US&page=1`);
+    async ({ category, page }) => {
+        const response = await fetch(`${BASE_URL}?api_key=${API_KEY}&language=en-US&page=${page}`);
         const data = await response.json();
-        return data.results;
+        return { people: data.results, page };
     }
 );
 
 const peopleSlice = createSlice({
     name: "people",
-    initialState: { people: [], status: "idle", error: null },
-    reducers: {},
+    initialState: { people: [], status: "idle", error: null, page: 1 },
+    reducers: {
+        loadMore: (state) => {
+            state.page += 1;
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchPeople.pending, (state) => {
@@ -23,7 +27,11 @@ const peopleSlice = createSlice({
             })
             .addCase(fetchPeople.fulfilled, (state, action) => {
                 state.status = "succeeded";
-                state.people = action.payload;
+                if (action.payload.page === 1) {
+                    state.people = action.payload.people;
+                } else {
+                    state.people = [...state.people, ...action.payload.people];
+                }
             })
             .addCase(fetchPeople.rejected, (state, action) => {
                 state.status = "failed";
@@ -32,4 +40,5 @@ const peopleSlice = createSlice({
     },
 });
 
+export const { loadMore } = peopleSlice.actions;
 export default peopleSlice.reducer;

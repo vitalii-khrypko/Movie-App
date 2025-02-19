@@ -5,19 +5,30 @@ const BASE_URL = "https://api.themoviedb.org/3/movie";
 
 export const fetchMovies = createAsyncThunk(
     "movies/fetchMovies",
-    async (category = "now_playing") => {
-        const response = await fetch(`${BASE_URL}/${category}?api_key=${API_KEY}&language=en-US&page=1`);
+    async ({ category, page }) => {
+        const response = await fetch(`${BASE_URL}/${category}?api_key=${API_KEY}&language=en-US&page=${page}`);
         const data = await response.json();
-        return data.results;
+        return { movies: data.results, page };
     }
 );
 
 const moviesSlice = createSlice({
     name: "movies",
-    initialState: { movies: [], status: "idle", error: null, category: "now_playing" },
+    initialState: { movies: [], status: "idle", error: null, category: "now_playing", page: 1 },
     reducers: {
         setCategory: (state, action) => {
             state.category = action.payload;
+            state.movies = []; // Clear movies when changing categories
+            state.page = 1; // Start from the first page.
+        },
+        loadMore: (state) => {
+            state.page += 1; // Increase page number
+        },
+        resetMovies: (state) => {
+            state.movies = [];
+            state.status = "idle";
+            state.error = null;
+            state.page = 1;
         }
     },
     extraReducers: (builder) => {
@@ -27,7 +38,16 @@ const moviesSlice = createSlice({
             })
             .addCase(fetchMovies.fulfilled, (state, action) => {
                 state.status = "succeeded";
-                state.movies = action.payload;
+
+                const uniqueMovie = action.payload.movies.filter(
+                    (newMovie) => !state.movies.some((existingMovie) => existingMovie.id === newMovie.id)
+                );
+
+                if (action.payload.page === 1) {
+                    state.movies = uniqueMovie;
+                } else {
+                    state.movies = [...state.movies, ...uniqueMovie];
+                }
             })
             .addCase(fetchMovies.rejected, (state, action) => {
                 state.status = "failed";
@@ -36,5 +56,5 @@ const moviesSlice = createSlice({
     },
 });
 
-export const { setCategory } = moviesSlice.actions;
+export const { setCategory, loadMore, resetMovies } = moviesSlice.actions;
 export default moviesSlice.reducer;
