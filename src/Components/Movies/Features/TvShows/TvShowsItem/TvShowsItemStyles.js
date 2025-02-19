@@ -1,9 +1,9 @@
 import { styled } from "@mui/material/styles";
-import { Box, Typography, Avatar } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 export const TvDetailsContainer = styled(Box)(({ theme }) => ({
-    width: "100%",
-    minHeight: "100vh",
+    width: "100vw",
+    minHeight: "60vh",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -11,7 +11,8 @@ export const TvDetailsContainer = styled(Box)(({ theme }) => ({
     backgroundSize: "cover",
     backgroundPosition: "center",
     padding: "80px 20px",
-
+    marginTop: "30px",
+    overflowX: "hidden",
     "&::before": {
         content: '""',
         position: "absolute",
@@ -19,9 +20,8 @@ export const TvDetailsContainer = styled(Box)(({ theme }) => ({
         left: 0,
         width: "100%",
         height: "100%",
-        background: "linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 10%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.9) 100%)", // градієнт для кращого вигляду
+        background: "linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 10%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.9) 100%)",
     },
-
     [theme.breakpoints.up("md")]: {
         padding: "120px 60px",
     },
@@ -36,7 +36,6 @@ export const TvContent = styled(Box)(({ theme }) => ({
     maxWidth: "1200px",
     width: "100%",
     gap: "20px",
-
     [theme.breakpoints.up("md")]: {
         flexDirection: "row",
         alignItems: "flex-start",
@@ -44,16 +43,13 @@ export const TvContent = styled(Box)(({ theme }) => ({
 }));
 
 export const Poster = styled("img")(({ theme }) => ({
-    width: "100%",
-    maxWidth: "400px",
+    maxWidth: "300px",
     borderRadius: "12px",
     boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.6)",
     transition: "transform 0.3s ease-in-out",
-
     "&:hover": {
         transform: "scale(1.05)",
     },
-
     [theme.breakpoints.up("md")]: {
         width: "35%",
     },
@@ -64,7 +60,6 @@ export const TvInfo = styled(Box)(({ theme }) => ({
     maxWidth: "700px",
     textAlign: "center",
     zIndex: 2,
-
     [theme.breakpoints.up("md")]: {
         textAlign: "left",
         padding: "0 40px",
@@ -92,61 +87,84 @@ export const TvOverview = styled(Typography)({
     color: "#ddd",
 });
 
-// Стилізуємо контейнер для актора
 export const CastContainer = styled(Box)(({ theme }) => ({
     display: "flex",
     flexDirection: "row",
     overflowX: "auto",
-    gap: "16px",
+    gap: "20px",
     justifyContent: "flex-start",
     padding: "20px 0",
-    marginTop: "20px",
-
     [theme.breakpoints.up("md")]: {
         gap: "24px",
     },
 }));
 
-// Стиль для кожного актора
 export const ActorCard = styled(Box)(({ theme }) => ({
     textAlign: "center",
-    width: "120px", // Встановлено фіксовану ширину для карток актора
+    width: "180px",
     boxSizing: "border-box",
-
-    [theme.breakpoints.up("md")]: {
-        width: "150px", // Розширюємо на більших екранах
-    },
-}));
-
-// Стиль для аватарки актора
-export const ActorAvatar = styled(Avatar)(({ theme }) => ({
-    width: "90px", // Стандартний розмір
-    height: "90px",
-    margin: "0 auto",
-    boxShadow: "0 4px 10px rgba(0, 0, 0, 0.6)",
-    transition: "transform 0.3s ease",
-
+    borderRadius: "12px",
+    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
+    overflow: "hidden",
+    transition: "transform 0.3s ease-in-out",
+    marginBottom: "15px",
     "&:hover": {
-        transform: "scale(1.05)", // Легке збільшення аватарки при наведенні
+        transform: "scale(1.1)",
     },
-
     [theme.breakpoints.up("md")]: {
-        width: "100px", // Трошки більша аватарка на великих екранах
-        height: "100px",
+        width: "220px",
     },
 }));
 
-// Стиль для тексту під аватаркою
+export const ActorAvatar = styled("img")(({ theme }) => ({
+    width: "120px",
+    height: "160px",
+    margin: "0 auto",
+    objectFit: "cover",
+    boxShadow: "0 6px 15px rgba(0, 0, 0, 0.5)",
+    transition: "transform 0.3s ease",
+    "&:hover": {
+        transform: "scale(1.1)",
+    },
+    [theme.breakpoints.up("md")]: {
+        width: "130px",
+        height: "170px",
+    },
+}));
+
 export const ActorName = styled(Typography)(({ theme }) => ({
-    fontSize: "1rem",
+    fontSize: "1.1rem",
     fontWeight: "bold",
     marginTop: "8px",
     color: "#fff",
 }));
 
-// Стиль для тексту щодо персонажа
 export const ActorCharacter = styled(Typography)(({ theme }) => ({
-    fontSize: "0.875rem",
+    fontSize: "1rem",
     color: "#b0b0b0",
 }));
 
+export const ScrollableContainer = styled(Box)({
+    display: "flex",
+    overflowX: "auto",
+    gap: "12px",
+    padding: "10px 20px",
+    scrollSnapType: "x mandatory",
+    scrollPadding: "20px",
+    WebkitOverflowScrolling: "touch",
+
+    "&::-webkit-scrollbar": {
+        height: "15px", // Зробимо трохи товстішим для видимості
+    },
+    "&::-webkit-scrollbar-track": {
+        background: "rgb(232,230,230)", // Трохи затемнений фон
+        borderRadius: "10px",
+    },
+    "&::-webkit-scrollbar-thumb": {
+        background: "rgba(174,172,172,0.5)",
+        borderRadius: "10px",
+    },
+    "&::-webkit-scrollbar-thumb:hover": {
+        background: "rgba(142,140,140,0.7)",
+    },
+});

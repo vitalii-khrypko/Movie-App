@@ -15,11 +15,22 @@ export const fetchTvShowCredits = createAsyncThunk("tvShowsItem/fetchTvShowCredi
     return data.cast.slice(0, 10);
 });
 
+export const fetchTvShowTrailer = createAsyncThunk("tvShowsItem/fetchTvShowTrailer", async (id) => {
+    const response = await fetch(`${BASE_URL}/${id}/videos?api_key=${API_KEY}&language=en-US`);
+    if (!response.ok) {
+        throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    const trailers = data.results.filter(video => video.type === "Trailer");
+    return trailers;
+});
+
 const tvShowsItemSlice = createSlice({
     name: "tvShowsItem",
     initialState: {
         tvShow: null,
         cast: [],
+        trailer: null,
         status: "idle",
         error: null
     },
@@ -39,6 +50,9 @@ const tvShowsItemSlice = createSlice({
             })
             .addCase(fetchTvShowCredits.fulfilled, (state, action) => {
                 state.cast = action.payload;
+            })
+            .addCase(fetchTvShowTrailer.fulfilled, (state, action) => {
+                state.trailer = action.payload;
             });
     }
 });

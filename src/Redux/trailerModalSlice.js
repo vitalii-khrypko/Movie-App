@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const trailerMovieSlice = createSlice({
+const trailerModalSlice = createSlice({
     name: "trailerModal",
     initialState: {
         isOpen: false,
@@ -15,5 +15,5 @@ const trailerMovieSlice = createSlice({
     },
 });
 
-export const { openTrailerModal, closeTrailerModal } = trailerMovieSlice.actions;
-export default trailerMovieSlice.reducer;
+export const { openTrailerModal, closeTrailerModal } = trailerModalSlice.actions;
+export default trailerModalSlice.reducer;

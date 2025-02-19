@@ -6,7 +6,7 @@ import {
     fetchMovieCredits,
     fetchMovieTrailer
 } from "../../../../../Redux/Features/Movies/moviesItemSlice";
-import { openTrailerModal, closeTrailerModal } from "../../../../../Redux/Features/Movies/trailerMovieSlice";
+import { openTrailerModal, closeTrailerModal } from "../../../../../Redux/trailerModalSlice";
 import {
     Typography,
     CircularProgress,

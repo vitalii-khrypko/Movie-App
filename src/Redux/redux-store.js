@@ -6,7 +6,7 @@ import tvShowsReducer from "./Features/TvShows/tvShowsSlice";
 import tvShowsItemReducer from "./Features/TvShows/tvShowsItemSlice";
 import scrollReducer from "./scrollSlice";
 import peopleReducer from "./Features/People/peopleSlice";
-import trailerMovieReducer from "./Features/Movies/trailerMovieSlice"
+import trailerModalReducer from "./trailerModalSlice"
 
 export const store = configureStore({
     reducer: {
@@ -17,7 +17,7 @@ export const store = configureStore({
         tvShowsItem: tvShowsItemReducer,
         scroll: scrollReducer,
         people: peopleReducer,
-        trailerModal: trailerMovieReducer
+        trailerModal: trailerModalReducer
     },
 });
 
