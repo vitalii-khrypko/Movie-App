@@ -1,15 +1,20 @@
 import { Container, Grid } from "@mui/material";
 import { HeaderContainer, HeaderTitle, NavList, NavButton } from "./HeaderStyles";
 import {Link} from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setSection } from "../../Redux/scrollSlice";
+
 
 const Header = () => {
+    const dispatch = useDispatch();
+
     return (
         <HeaderContainer>
             <Container>
                 <Grid container justifyContent="space-between" alignItems="center" py={2}>
                     <Grid item>
                         <Link to={`/Movie-App`} style={{ textDecoration: "none", color: "inherit" }}>
-                            <HeaderTitle variant="h4">
+                            <HeaderTitle variant="h6">
                                 Movie Explorer
                             </HeaderTitle>
                         </Link>
@@ -17,9 +22,9 @@ const Header = () => {
                     <Grid item>
                         <nav>
                             <NavList>
-                                <li><NavButton>Home</NavButton></li>
-                                <li><NavButton>Movies</NavButton></li>
-                                <li><NavButton>Favorites</NavButton></li>
+                                <li><NavButton onClick={() => dispatch(setSection("movies"))}>Movies</NavButton></li>
+                                <li><NavButton onClick={() => dispatch(setSection("tvshows"))}>TV Shows</NavButton></li>
+                                <li><NavButton onClick={() => dispatch(setSection("people"))}>People</NavButton></li>
                             </NavList>
                         </nav>
                     </Grid>
