@@ -1,8 +1,10 @@
 import { useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import Movies from "./Features/Movies/Movies";
 import TvShows from "./Features/TvShows/TvShows";
 import People from "./Features/People/People";
+import {resetMovies} from "../../Redux/Features/Movies/moviesSlice";
+import {resetTvShows} from "../../Redux/Features/TvShows/tvShowsSlice";
 
 const Main = () => {
     const section = useSelector((state) => state.scroll.section);
@@ -19,6 +21,16 @@ const Main = () => {
             peopleRef.current.scrollIntoView({ behavior: "smooth" });
         }
     }, [section]);
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(resetMovies()); // Reset the state of movies when going to the main page
+    }, [dispatch]);
+
+    useEffect(() => {
+        dispatch(resetTvShows()); // Reset the state of movies when going to the main page
+    }, [dispatch]);
 
     return (
         <>

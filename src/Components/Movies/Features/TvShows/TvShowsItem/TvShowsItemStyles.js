@@ -101,8 +101,7 @@ export const CastContainer = styled(Box)(({ theme }) => ({
 
 export const ActorCard = styled(Box)(({ theme }) => ({
     textAlign: "center",
-    width: "180px",
-    boxSizing: "border-box",
+    width: "180px", // fixed width
     borderRadius: "12px",
     boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
     overflow: "hidden",
@@ -115,6 +114,7 @@ export const ActorCard = styled(Box)(({ theme }) => ({
         width: "220px",
     },
 }));
+
 
 export const ActorAvatar = styled("img")(({ theme }) => ({
     width: "120px",

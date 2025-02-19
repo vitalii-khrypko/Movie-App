@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchTvShows, setCategory } from "../../../../Redux/Features/TvShows/tvShowsSlice";
+import { fetchTvShows, setCategory, loadMore } from "../../../../Redux/Features/TvShows/tvShowsSlice";
 import { useNavigate } from "react-router-dom";
 import { Grid, CardMedia, CardContent, CircularProgress } from "@mui/material";
 import {
@@ -14,19 +14,27 @@ import {
     TvRating,
     ScrollableContainer
 } from "./TvShowsStyles";
+import {LoadMoreButton, LoadMoreButtonContainer} from "../Movies/MoviesStyles";
 
 const TvShows = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { tvShows, status, error, category } = useSelector((state) => state.tvShows);
+    const { tvShows, status, error, category, page } = useSelector((state) => state.tvShows);
 
     useEffect(() => {
-        dispatch(fetchTvShows(category));
-    }, [dispatch, category]);
+        dispatch(fetchTvShows({ category, page }));
+    }, [dispatch, category, page]);
 
     const handleCategoryChange = (newCategory) => {
-        dispatch(setCategory(newCategory));
+        if (category !== newCategory) {
+            dispatch(setCategory(newCategory));
+        }
     };
+
+    const handleLoadMore = () => {
+        dispatch(loadMore());
+        dispatch(fetchTvShows({ category, page: page + 1 }));
+    }
 
     return (
         <TvShowsContainer>
@@ -67,6 +75,10 @@ const TvShows = () => {
                         </TvCard>
                     </Grid>
                 ))}
+
+                <LoadMoreButtonContainer>
+                    <LoadMoreButton onClick={handleLoadMore}>more...</LoadMoreButton>
+                </LoadMoreButtonContainer>
             </ScrollableContainer>
         </TvShowsContainer>
     )

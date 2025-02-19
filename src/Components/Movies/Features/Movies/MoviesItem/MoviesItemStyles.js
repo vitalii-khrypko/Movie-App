@@ -109,7 +109,7 @@ export const CastContainer = styled(Box)(({ theme }) => ({
 // Стиль для кожного актора
 export const ActorCard = styled(Box)(({ theme }) => ({
     textAlign: "center",
-    width: "180px", // Збільшено ширину карток
+    width: "180px", // Increased card width
     boxSizing: "border-box",
     borderRadius: "12px",
     boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
@@ -118,30 +118,30 @@ export const ActorCard = styled(Box)(({ theme }) => ({
     marginBottom: "15px",
 
     "&:hover": {
-        transform: "scale(1.1)", // Легке збільшення при наведенні
+        transform: "scale(1.1)", // Easy zoom on hover
     },
 
     [theme.breakpoints.up("md")]: {
-        width: "220px", // Розширено на більших екранах
+        width: "220px", // Expanded on larger screens
     },
 }));
 
-// Стиль для фотографії актора (замінюємо Avatar на img)
+// Style for actor photo (replace Avatar with img)
 export const ActorAvatar = styled("img")(({ theme }) => ({
-    width: "120px", // Розмір аватарки
-    height: "160px", // Висота аватарки
+    width: "120px",
+    height: "160px",
     margin: "0 auto",
-    objectFit: "cover", // Щоб зберегти пропорції і уникнути деформації
+    objectFit: "cover", // To maintain proportions and avoid deformation
     boxShadow: "0 6px 15px rgba(0, 0, 0, 0.5)",
     transition: "transform 0.3s ease",
 
     "&:hover": {
-        transform: "scale(1.1)", // Легке збільшення аватарки при наведенні
+        transform: "scale(1.1)", // Easy avatar enlargement on hover
     },
 
     [theme.breakpoints.up("md")]: {
-        width: "130px", // Трошки більша аватарка на великих екранах
-        height: "170px", // Вища аватарка на великих екранах
+        width: "130px", // Slightly larger avatar on large screens
+        height: "170px", // Higher avatar on big screens
     },
 }));
 
@@ -171,10 +171,10 @@ export const ScrollableContainer = styled(Box)({
     WebkitOverflowScrolling: "touch",
 
     "&::-webkit-scrollbar": {
-        height: "15px", // Зробимо трохи товстішим для видимості
+        height: "15px", // Let's make it a little thicker for visibility
     },
     "&::-webkit-scrollbar-track": {
-        background: "rgb(232,230,230)", // Трохи затемнений фон
+        background: "rgb(232,230,230)", // Slightly darkened background
         borderRadius: "10px",
     },
     "&::-webkit-scrollbar-thumb": {

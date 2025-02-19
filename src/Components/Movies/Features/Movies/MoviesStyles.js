@@ -90,10 +90,10 @@ export const ScrollableContainer = styled(Box)({
     WebkitOverflowScrolling: "touch",
 
     "&::-webkit-scrollbar": {
-        height: "15px", // Зробимо трохи товстішим для видимості
+        height: "15px",
     },
     "&::-webkit-scrollbar-track": {
-        background: "rgb(232,230,230)", // Трохи затемнений фон
+        background: "rgb(232,230,230)",
         borderRadius: "10px",
     },
     "&::-webkit-scrollbar-thumb": {
@@ -102,5 +102,30 @@ export const ScrollableContainer = styled(Box)({
     },
     "&::-webkit-scrollbar-thumb:hover": {
         background: "rgba(142,140,140,0.7)",
+    },
+});
+
+export const LoadMoreButtonContainer = styled(Box)({
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    margin: "20px 0",
+});
+
+export const LoadMoreButton = styled(Button)({
+    background: "#032541",
+    color: "#fff",
+    padding: "12px 24px",
+    fontSize: "16px",
+    fontWeight: "bold",
+    textTransform: "none",
+    borderRadius: "40px",
+    transition: "transform 0.2s ease-in-out, background 0.3s ease",
+    "&:hover": {
+        background: "#01b4e4",
+        transform: "scale(1.05)",
+    },
+    "&:active": {
+        transform: "scale(0.95)",
     },
 });

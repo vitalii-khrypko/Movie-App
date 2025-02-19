@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPeople } from "../../../../Redux/Features/People/peopleSlice";
+import { fetchPeople, loadMore } from "../../../../Redux/Features/People/peopleSlice";
 import { useNavigate } from "react-router-dom";
 import { Grid, CardMedia, CardContent, CircularProgress, Typography } from "@mui/material";
 import {
@@ -12,15 +12,21 @@ import {
     PeopleRating,
     ScrollableContainer
 } from "./PeopleStyles";
+import {LoadMoreButton, LoadMoreButtonContainer} from "../Movies/MoviesStyles";
 
 const People = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { people, status, error } = useSelector((state) => state.people);
+    const { people, status, error, page } = useSelector((state) => state.people);
 
     useEffect(() => {
-        dispatch(fetchPeople());
+        dispatch(fetchPeople({page: 1}));
     }, [dispatch]);
+
+    const handleLoadMore = () => {
+        dispatch(loadMore());
+        dispatch(fetchPeople({ page: page + 1 }));
+    };
 
     return (
         <PeopleContainer>
@@ -48,6 +54,10 @@ const People = () => {
                         </PeopleCard>
                     </Grid>
                 ))}
+
+                <LoadMoreButtonContainer>
+                    <LoadMoreButton onClick={handleLoadMore}>more...</LoadMoreButton>
+                </LoadMoreButtonContainer>
             </ScrollableContainer>
         </PeopleContainer>
     );
